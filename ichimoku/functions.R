@@ -71,6 +71,7 @@ pl <- function(signal_table, fee, start_date = min(signal_table$start), end_date
 
 
 
+
 # VISUALISING
 
 

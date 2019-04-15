@@ -4,3 +4,4 @@ data <- data %>%
   mutate(start = as.POSIXct(as.character(start), format = "%d/%m/%Y %H:%M"))
 
 save(data, file = "ichimoku/data.rda")
+
