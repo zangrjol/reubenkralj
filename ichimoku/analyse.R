@@ -91,7 +91,7 @@ load("ichimoku/data.rda")
     
     percent_profitable <- profit_trades/total_trades
     
-    
+   
     
     ## averages
     avg_trade_net_profit <- net_profit/total_trades
@@ -130,7 +130,20 @@ load("ichimoku/data.rda")
    
     
 ## create a summary table now:    
+    prfts <- c(net_profit, gross_profit, gross_loss, profit_factor) 
+    trds <- c(total_trades, profit_trades, loss_trades, even_trades, percent_profitable)
+    avgs <- c(avg_trade_net_profit, avg_winning_trade, avg_losing_trade, largest_win, largest_loss)
+    cnsct <- c(max_cons_win, max_cons_loss)
+    shrs <- c(max_shares_held)
+    drwdn<- c(max_daily_percent_drawdown)
     
+    summary_table <- data.frame(Summary = c("Net Profit", "Gross Profit", "Gross Loss", "Profit Factor", "",
+                           "Total Trades", "Profit Trades", "Loss Trades", "Even Trades", "Percent Profitable","", 
+                           "Average Trade Net Profit", "Average Winning Trade", "Average Losing Trade", "Largest Win", "Largest Loss","",
+                           "Max Conecutive Wins", "Max Consecutive Losses", "",
+                           "Max Shares Held", "",
+                           "Max Daily Percent Drawdown"), 
+               All.Trades = round(c(prfts,0, trds,0, avgs,0, cnsct,0, shrs,0, drwdn), 2))
     
 ### visualisations of performance    
      #histogram of drawdowns
