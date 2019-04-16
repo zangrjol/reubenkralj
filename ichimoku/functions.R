@@ -69,7 +69,28 @@ pl <- function(signal_table, fee, start_date = min(signal_table$start), end_date
   signal_table$pl[nrow(signal_table)]
 }
 
-
+trades_pl <- function(signal_table, fee, start_date = min(signal_table$start), end_date = max(signal_table$start)) {
+  signal_table %>% 
+    filter(start >= start_date & start <= end_date) -> signal_table
+  signal_table <- cbind(signal_table, pl = 1)
+  
+  for (i in 2:nrow(signal_table)) {
+    if (signal_table$signal[i-1] > 0 ) {
+      if (sign(signal_table$signal[i]) == sign(signal_table$signal[i-1])) { # substract fee if trade is conducted
+        signal_table$pl[i] = (signal_table$open[i]/signal_table$open[i-1])*signal_table$pl[i-1]
+      } else {
+        signal_table$pl[i] = (signal_table$open[i]/signal_table$open[i-1]-fee)*signal_table$pl[i-1]
+      }
+    } else {
+      if (sign(signal_table$signal[i]) == sign(signal_table$signal[i-1])) {
+        signal_table$pl[i] = (signal_table$open[i-1]/signal_table$open[i])*signal_table$pl[i-1]
+      } else {
+        signal_table$pl[i] = (signal_table$open[i-1]/signal_table$open[i]-fee)*signal_table$pl[i-1]
+      }
+    }
+  }
+  signal_table
+}
 
 
 # VISUALISING

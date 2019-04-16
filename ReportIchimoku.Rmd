@@ -1,0 +1,53 @@
+---
+title: "Ichimoku Report"
+author: "Zan Grjol"
+date: "2019 M04 16"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(zoo)
+library(smooth)
+library(Mcomp)
+library(ggplot2)
+library("plot3D")
+library(plotly)
+```
+
+## Finding the optimal strategy for ichimoku indicator
+
+This is a summary report of finding the best parameters for ichimoku strategy trading.
+
+```{r 3D chart of different parameters, echo=FALSE}
+optimals_plot
+```
+
+## Performance chart 
+
+Performance chart with the most profitable parameters:
+
+```{r Performance, echo=FALSE}
+perf_line
+```
+
+## Summary Table
+
+Summary table of the strategy:
+
+
+```{r Summary Table, echo=FALSE}
+summary_table
+```
+
+## Drawdowns Distribution
+
+Distribution of daily maximum drawdon percentage of balance:
+
+
+```{r Drawdown History, echo=FALSE}
+drawdown_hist
+```
+

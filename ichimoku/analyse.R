@@ -8,7 +8,6 @@ library("plot3D")
 library(plotly)
 load("ichimoku/data.rda")
 
-
 # PREPARE TABLE: filter out to only when the position changes
     signal_ichimoku <- function(data, signal, base) {
       ichimoku(data, signal, base) %>% 
@@ -45,7 +44,7 @@ load("ichimoku/data.rda")
     matrix_final <- data.matrix(a)
     
     ## plot
-    plot_ly(x = ~rownames(matrix_final), y = ~ colnames(matrix_final), z = ~matrix_final) %>% add_surface()
+    optimals_plot <- plot_ly(x = ~rownames(matrix_final), y = ~ colnames(matrix_final), z = ~matrix_final) %>% add_surface()
 
     
 ### now choose the best value and present the performance
@@ -55,7 +54,7 @@ load("ichimoku/data.rda")
     top_performance <- ichimoku_performance(data, best_signal, best_base, 0.00025)
     
     ## plot performance chart of the best ichimoku parameters
-    top_performance %>% ggplot(aes(start, pl)) + geom_line()
+    perf_line <- top_performance %>% ggplot(aes(start, pl)) + geom_line()
     
 ### createPerformance Summary
     investment <- 10000
